@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'splash_screen.dart';
-import 'app_pages.dart'; // routing config
+import 'app/routes/app_pages.dart';
+import 'app/modules/splash/splash_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Future.delayed(Duration(seconds: 3)),
+      future: Future.delayed(const Duration(seconds: 3)),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
+          // Jangan pakai `const` karena SplashScreen bukan const constructor
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: SplashScreen(),
           );
         } else {
